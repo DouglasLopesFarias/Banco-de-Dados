@@ -1,0 +1,15 @@
+CODIGO          | DATA DE EMISSÃO | 
+1010            | 18/08/2026      |  
+
+
+CODIGO CLIENTE  | NOME CLIENTE    |
+12300           | DOUGLAS LOPES   | 
+
+
+CODIGO PRODUTO  | NOME PRODUTO    | VALOR UNITÁRIO | QUANTIDADE  | VALOR TOTAL  |
+1               | SOFA AZUL       |  R$ 500,00     |    2        | R$ 1.000,00  |
+2               | ARMARIO L       |  R$ 200,00     |    1        | R$   200,00  |
+
+
+VALOR TODAL DA NOTA  |
+R$ 1.200,00          |
