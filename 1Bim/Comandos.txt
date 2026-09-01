@@ -5,6 +5,11 @@ create table cidade(
 	uf char(2)
 );
 
+//== add chave estrangeira
+ALTER TABLE VENDA_ITENS ADD CONSTRAINT  FK_VENDA_ITENS_VENDA FOREIGN KEY (VENDA_ID) REFERENCES VENDA(ID);
+
+
+
 //== exemplo para inserir registros
 insert into cidade(id,nome,uf) values(1, 'Maringá', 'PR');
 insert into cidade(id,nome,uf) values(2, 'Sarandi', 'PR');
