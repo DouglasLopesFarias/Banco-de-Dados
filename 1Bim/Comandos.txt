@@ -1,1 +1,19 @@
+//== exemplo para criar tabela
+create table cidade(
+    id int primary key,
+	nome varchar(100),
+	uf char(2)
+);
 
+//== exemplo para inserir registros
+insert into cidade(id,nome,uf) values(1, 'Maringá', 'PR');
+insert into cidade(id,nome,uf) values(2, 'Sarandi', 'PR');
+insert into cidade(id,nome,uf) values(3, 'Marialva', 'PR');
+insert into cidade(id,nome,uf) values(4, 'São Paulo', 'SP');
+insert into cidade(id,nome,uf) values(5, 'Rio de Janeiro', 'RJ');
+
+//== exemplo para alterar registros
+update cidade set nome='Marilia', uf='SP' where id = 1;
+
+//== exemplo para excluir registros
+delete from cidade  where id = 1;
