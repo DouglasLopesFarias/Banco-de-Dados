@@ -17,8 +17,34 @@ insert into cidade(id,nome,uf) values(3, 'Marialva', 'PR');
 insert into cidade(id,nome,uf) values(4, 'São Paulo', 'SP');
 insert into cidade(id,nome,uf) values(5, 'Rio de Janeiro', 'RJ');
 
+create table cliente(
+  ID int not null primary key,
+  NOME varchar(100),
+  ENDERECO varchar(200),
+  FONE varchar(20),
+  DT_NASC date,
+  CIDADE_ID int
+);
+
+insert into cliente(ID,NOME,ENDERECO,FONE,DT_NASC,CIDADE_ID)
+values(1, 'DOUGLAS', 'AV BRASIL', '(44) 9 9999-8888', '01/01/1981', 5);
+
+ALTER TABLE CLIENTE ADD CONSTRAINT  FK_CLIENTE_CIDADE 
+FOREIGN KEY (CIDADE_ID) REFERENCES CIDADE(ID);
+
+
 //== exemplo para alterar registros
 update cidade set nome='Marilia', uf='SP' where id = 1;
 
 //== exemplo para excluir registros
 delete from cidade  where id = 1;
+
+
+//== PRIMEIROS EXEMPLOS DE SELECT
+SELECT * FROM CIDADE WHERE UF = 'PR'
+SELECT * FROM CIDADE WHERE NOME = 'RIO DE JANEIRO'
+SELECT * FROM CIDADE WHERE NOME LIKE '%DE JANEIRO'
+SELECT * FROM CIDADE WHERE NOME LIKE '%DE%'
+SELECT * FROM CIDADE WHERE NOME LIKE '%DE%' AND UF = 'PR'
+SELECT * FROM CIDADE WHERE NOME LIKE '%DE%' OR UF = 'PR'
+SELECT * FROM CIDADE WHERE ID BETWEEN 1 AND 3 
