@@ -5,64 +5,6 @@ create table cidade(
 	uf char(2)
 );
 
-//== TABELA DE VENDA_ITENS
-CREATE TABLE VENDA_ITENS(
-    PRODUTO_ID INT NOT NULL,
-    VENDA_ID INT NOT NULL,
-    VL_UNIT DECIMAL(10,2),
-    QT INT NOT NULL,
-    VL_TOTAL DECIMAL(10,2),
-    PRIMARY KEY (PRODUTO_ID, VENDA_ID)
-);
-
-//== add chave estrangeira
-ALTER TABLE VENDA_ITENS ADD CONSTRAINT  FK_VENDA_ITENS_VENDA FOREIGN KEY (VENDA_ID) REFERENCES VENDA(ID);
-ALTER TABLE VENDA_ITENS ADD CONSTRAINT  FK_VENDA_ITENS_PRODUTO FOREIGN KEY(PRODUTO_ID) REFERENCES PRODUTO(ID);
-
-
-
-
-
-//== exemplo para inserir registros
-insert into cidade(id,nome,uf) values(1, 'Maringá', 'PR');
-insert into cidade(id,nome,uf) values(2, 'Sarandi', 'PR');
-insert into cidade(id,nome,uf) values(3, 'Marialva', 'PR');
-insert into cidade(id,nome,uf) values(4, 'São Paulo', 'SP');
-insert into cidade(id,nome,uf) values(5, 'Rio de Janeiro', 'RJ');
-
-create table cliente(
-  ID int not null primary key,
-  NOME varchar(100),
-  ENDERECO varchar(200),
-  FONE varchar(20),
-  DT_NASC date,
-  CIDADE_ID int
-);
-
-insert into cliente(ID,NOME,ENDERECO,FONE,DT_NASC,CIDADE_ID)
-values(1, 'DOUGLAS', 'AV BRASIL', '(44) 9 9999-8888', '01/01/1981', 5);
-
-ALTER TABLE CLIENTE ADD CONSTRAINT  FK_CLIENTE_CIDADE 
-FOREIGN KEY (CIDADE_ID) REFERENCES CIDADE(ID);
-
-
-//== exemplo para alterar registros
-update cidade set nome='Marilia', uf='SP' where id = 1;
-
-//== exemplo para excluir registros
-delete from cidade  where id = 1;
-
-
-//== PRIMEIROS EXEMPLOS DE SELECT
-SELECT * FROM CIDADE WHERE UF = 'PR'
-SELECT * FROM CIDADE WHERE NOME = 'RIO DE JANEIRO'
-SELECT * FROM CIDADE WHERE NOME LIKE '%DE JANEIRO'
-SELECT * FROM CIDADE WHERE NOME LIKE '%DE%'
-SELECT * FROM CIDADE WHERE NOME LIKE '%DE%' AND UF = 'PR'
-SELECT * FROM CIDADE WHERE NOME LIKE '%DE%' OR UF = 'PR'
-SELECT * FROM CIDADE WHERE ID BETWEEN 1 AND 3 
-
-//==
 CREATE TABLE Fornecedor(
 	id INT NOT NULL PRIMARY KEY,
 	cidade_id INT NOT NULL,
@@ -92,15 +34,6 @@ CREATE TABLE Cliente(
 	FOREIGN KEY(cidade_id) REFERENCES cidade(id)
 );
 
-CREATE TABLE Venda(
-	id INT NOT NULL PRIMARY KEY,
-	cliente_id INT NOT NULL,
-	data_emicao DATE,
-	valor_total DECIMAL(10,2),
-	FOREIGN KEY(cliente_id) REFERENCES cliente(id)	
-)
-
-
 CREATE TABLE PRODUTO(
   ID INT NOT NULL,
   DESCRICAO VARCHAR(150),
@@ -108,6 +41,14 @@ CREATE TABLE PRODUTO(
   QT DECIMAL(10,3),
   PRIMARY KEY (ID)
 );
+
+CREATE TABLE Venda(
+	id INT NOT NULL PRIMARY KEY,
+	cliente_id INT NOT NULL,
+	data_emicao DATE,
+	valor_total DECIMAL(10,2),
+	FOREIGN KEY(cliente_id) REFERENCES cliente(id)	
+)
 
 CREATE TABLE VENDA_ITENS(
     PRODUTO_ID INT NOT NULL,
@@ -124,14 +65,44 @@ ALTER TABLE VENDA_ITENS ADD CONSTRAINT  FK_VENDA_ITENS_PRODUTO FOREIGN KEY(PRODU
 
 
 
-INSERT INTO VENDA(ID, CLIENTE_ID, DATA_EMICAO, VALOR_TOTAL) VALUES(1,1,'01-01-2026', '1200.00');
+//== exemplos de insert, update e delete 
 
+//== exemplo para inserir registros cidade
+insert into cidade(id,nome,uf) values(1, 'Maringá', 'PR');
+insert into cidade(id,nome,uf) values(2, 'Sarandi', 'PR');
+insert into cidade(id,nome,uf) values(3, 'Marialva', 'PR');
+insert into cidade(id,nome,uf) values(4, 'São Paulo', 'SP');
+insert into cidade(id,nome,uf) values(5, 'Rio de Janeiro', 'RJ');
 
-INSERT INTO VENDA(ID, CLIENTE_ID, DATA_EMICAO, VALOR_TOTAL) VALUES(1,1,'01-01-2026', '1200.00');
+//== cliente
+insert into cliente(ID,NOME,ENDERECO,FONE,DT_NASC,CIDADE_ID) values(1, 'DOUGLAS', 'AV BRASIL', '(44) 9 9999-8888', '01/01/1981', 5);
+//== exemplo de como add chave estrangeira depois de ter criado a tabela
+ALTER TABLE CLIENTE ADD CONSTRAINT  FK_CLIENTE_CIDADE FOREIGN KEY (CIDADE_ID) REFERENCES CIDADE(ID);
+//== insert de produto
 INSERT INTO PRODUTO(ID,DESCRICAO,VALOR,QT) VALUES(1,'SOFA AZUL', '1000.00', '100.00');
 INSERT INTO PRODUTO(ID,DESCRICAO,VALOR,QT) VALUES(2,'ARMARIO ', '500.00', '100.00');
+//== insert de venda
+INSERT INTO VENDA(ID, CLIENTE_ID, DATA_EMICAO, VALOR_TOTAL) VALUES(1,1,'01-01-2026', '1200.00');
+//== insert de venda_itens
 INSERT INTO VENDA_ITENS(PRODUTO_ID, VENDA_ID, VL_UNIT, QT, VL_TOTAL) VALUES(1,1,'500.00',2,'1000.00');
 INSERT INTO VENDA_ITENS(PRODUTO_ID, VENDA_ID, VL_UNIT, QT, VL_TOTAL) VALUES(2,1,'200.00',1,'200.00');
+
+//== exemplo para alterar registros
+update cidade set nome='Marilia', uf='SP' where id = 1;
+
+//== exemplo para excluir registros
+delete from cidade  where id = 1;
+
+//== PRIMEIROS EXEMPLOS DE SELECT
+SELECT * FROM CIDADE WHERE UF = 'PR'
+SELECT * FROM CIDADE WHERE NOME = 'RIO DE JANEIRO'
+SELECT * FROM CIDADE WHERE NOME LIKE '%DE JANEIRO'
+SELECT * FROM CIDADE WHERE NOME LIKE '%DE%'
+SELECT * FROM CIDADE WHERE NOME LIKE '%DE%' AND UF = 'PR'
+SELECT * FROM CIDADE WHERE NOME LIKE '%DE%' OR UF = 'PR'
+SELECT * FROM CIDADE WHERE ID BETWEEN 1 AND 3 
+
+
 
 
 
