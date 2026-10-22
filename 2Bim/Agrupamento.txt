@@ -1,0 +1,23 @@
+--contar registros count
+--select count(*) as total_cidades from cidade
+
+--selecionar maior
+--select max(cidade.id) from cidade
+
+--selecionar menor
+--select min(cidade.id) from cidade
+
+--selecione a soma
+--select sum(venda.valor_total) from venda
+
+--selecione a media
+--select avg(venda.valor_total) from venda
+
+--agrupamento group by
+select 
+cliente.id,
+cliente.nome, 
+count(venda.id) from cliente
+left join venda on venda.cliente_id  = cliente.id
+group by 1,2 
+order by cliente.nome
