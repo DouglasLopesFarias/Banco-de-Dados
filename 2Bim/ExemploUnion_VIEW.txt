@@ -20,3 +20,9 @@ inner join compra       on compra.fornecedor_id  = fornecedor.id
 inner join compra_itens on compra.id             = compra_itens.compra_id 
 group by cidade.nome
 
+
+
+//=== exemplo de view
+create view vw_cliente as (  select id, nome from cliente  )
+
+select * from vw_cliente
