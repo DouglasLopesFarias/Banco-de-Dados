@@ -1,0 +1,22 @@
+select 
+'VENDAS' as tipo,
+cidade.nome,
+sum(venda_itens.qt) as total_produto
+from cidade 
+inner join cliente     on cliente.cidade_id = cidade.id
+inner join venda       on venda.cliente_id  = cliente.id
+inner join venda_itens on venda.id          = venda_itens.venda_id 
+group by cidade.nome
+
+union
+
+select
+'COMPRAS' as tipo,
+cidade.nome,
+sum(compra_itens.qt) as total_produto
+from cidade 
+inner join fornecedor   on fornecedor.cidade_id  = cidade.id
+inner join compra       on compra.fornecedor_id  = fornecedor.id
+inner join compra_itens on compra.id             = compra_itens.compra_id 
+group by cidade.nome
+
